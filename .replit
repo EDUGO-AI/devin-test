@@ -20,9 +20,13 @@ task = "shell.exec"
 args = "cd react && npx nx serve devin-test-react"
 
 [[ports]]
-localPort = 4203
+localPort = 4202
 externalPort = 80
 
 [[ports]]
-localPort = 4202
+localPort = 4203
 externalPort = 3000
+
+[[ports]]
+localPort = 4204
+externalPort = 3001
