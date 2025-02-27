@@ -52,23 +52,21 @@ export const SidebarNavigation: React.FC = () => {
               </h2>
               <ul className="space-y-1">
                 {section.items.map((item) => (
-                  <li key={item.name}>
-                    <NavigationMenu.Item>
-                      <NavigationMenu.Link asChild>
-                        <a
-                          href={item.path}
-                          className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
-                            item.active
-                              ? 'bg-indigo-800 text-white'
-                              : 'text-gray-300 hover:bg-indigo-700 hover:text-white'
-                          }`}
-                        >
-                          <span className="mr-3">{item.icon}</span>
-                          {item.name}
-                        </a>
-                      </NavigationMenu.Link>
-                    </NavigationMenu.Item>
-                  </li>
+                  <NavigationMenu.Item key={item.name}>
+                    <NavigationMenu.Link asChild>
+                      <a
+                        href={item.path}
+                        className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
+                          item.active
+                            ? 'bg-indigo-800 text-white'
+                            : 'text-gray-300 hover:bg-indigo-700 hover:text-white'
+                        }`}
+                      >
+                        <span className="mr-3">{item.icon}</span>
+                        {item.name}
+                      </a>
+                    </NavigationMenu.Link>
+                  </NavigationMenu.Item>
                 ))}
               </ul>
             </div>
