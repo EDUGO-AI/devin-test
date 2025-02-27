@@ -7,3 +7,14 @@ channel = "stable-24_05"
 
 [deployment]
 run = ["sh", "-c", "cd react && npm run start"]
+
+[workflows]
+runButton = "NX Serve"
+
+[[workflows.workflow]]
+name = "NX Serve"
+author = 813300
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd react && npx nx serve devin-test-react"
