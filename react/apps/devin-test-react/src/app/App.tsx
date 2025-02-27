@@ -7,9 +7,9 @@ import './App.css';
 const App = () => {
   return (
     <Router>
-      <div className="app">
+      <div className="app bg-gray-100 min-h-screen">
         <SidebarNavigation activeItem="dashboard" />
-        <div className="main-content">
+        <div className="main-content p-4">
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard-two" replace />} />
             <Route path="/dashboard-two" element={<DashboardTwo />} />
