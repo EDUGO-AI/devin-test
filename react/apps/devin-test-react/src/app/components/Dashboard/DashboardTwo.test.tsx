@@ -5,7 +5,7 @@ import DashboardTwo from './DashboardTwo';
 import '@testing-library/jest-dom';
 
 // Mock the console.log to avoid polluting test output
-jest.spyOn(console, 'log').mockImplementation(() => {});
+jest.spyOn(console, 'log').mockImplementation(() => { return undefined; });
 
 describe('DashboardTwo Integration', () => {
   test('creates a new lesson when clicking Create Lesson card', async () => {
