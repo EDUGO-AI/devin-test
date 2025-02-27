@@ -263,7 +263,7 @@ const DashboardTwo: React.FC = () => {
                 </select>
               </div>
               <div className="mb-4">
-                <label htmlFor="datetime" className="block text-sm font-medium text-gray-700 mb-1">Date & Time</label>
+                <label htmlFor="datetime" className="block text-sm font-medium text-gray-700 mb-1">Date and Time</label>
                 <input type="datetime-local" id="datetime" name="datetime" className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div className="mb-6">
