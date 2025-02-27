@@ -1,7 +1,9 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./apps/devin-test-react/src/**/*.{js,jsx,ts,tsx}",
+    "./libs/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
@@ -12,7 +14,10 @@ module.exports = {
         danger: '#EF4444',
         light: '#F9FAFB'
       }
-    }
+    },
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+    },
   },
   plugins: [],
 }
