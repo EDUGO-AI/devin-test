@@ -1,9 +1,53 @@
+
 {
   "name": "devin-test-react",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/devin-test-react/src",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project devin-test-react --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/devin-test-react"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "devin-test-react:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "devin-test-react:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "devin-test-react:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../coverage/apps/devin-test-react"
+      }
+    }
+  }
 }
