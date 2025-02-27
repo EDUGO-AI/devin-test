@@ -1,9 +1,15 @@
+
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
-import tailwindcss from '@tailwindcss/vite';
+
+// Use dynamic import for the ESM-only package
+const tailwindcssPlugin = async () => {
+  const { default: tailwindcss } = await import('@tailwindcss/vite');
+  return tailwindcss();
+};
 
 export default defineConfig({
   root: __dirname,
@@ -25,7 +31,7 @@ export default defineConfig({
     port: 4300,
     host: 'localhost',
   },
-  plugins: [react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md']), tailwindcss()],
+  plugins: [react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md']), tailwindcssPlugin()],
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
@@ -49,5 +55,4 @@ export default defineConfig({
       provider: 'v8',
     },
   },
-  // Removing CSS PostCSS configuration
 });

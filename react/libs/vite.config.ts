@@ -1,3 +1,4 @@
+
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -5,7 +6,12 @@ import dts from 'vite-plugin-dts';
 import * as path from 'path';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
-import tailwindcss from '@tailwindcss/vite';
+
+// Use dynamic import for the ESM-only package
+const tailwindcssPlugin = async () => {
+  const { default: tailwindcss } = await import('@tailwindcss/vite');
+  return tailwindcss();
+};
 
 export default defineConfig({
   root: __dirname,
@@ -20,7 +26,7 @@ export default defineConfig({
     react(),
     nxViteTsPaths(),
     nxCopyAssetsPlugin(['*.md']),
-    tailwindcss(),
+    tailwindcssPlugin(),
     dts({
       entryRoot: 'src',
       tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
