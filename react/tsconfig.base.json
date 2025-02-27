@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@edugo/ui-navigation": ["libs/src/index.ts"]
+      "@edugo/ui-navigation": ["libs/ui-navigation/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
