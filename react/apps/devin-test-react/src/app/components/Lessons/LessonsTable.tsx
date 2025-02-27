@@ -59,14 +59,14 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-collapse">
-        <thead className="bg-gray-50 text-xs text-gray-500 uppercase tracking-wider">
+        <thead className="bg-table-header text-xs uppercase font-medium text-gray-500 tracking-wider">
           <tr>
             <th className="px-4 py-3 text-left">
               <Checkbox.Root 
                 className="flex h-4 w-4 appearance-none items-center justify-center rounded border border-gray-300 bg-white"
                 aria-label="Select all rows"
               >
-                <Checkbox.Indicator className="text-primary">
+                <Checkbox.Indicator className="text-[#1a1a3f]">
                   <CheckIcon />
                 </Checkbox.Indicator>
               </Checkbox.Root>
@@ -79,9 +79,9 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
             <th className="px-4 py-3 text-left">Tools</th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-white divide-y divide-border-light">
           {lessons.map(lesson => (
-            <tr key={lesson.id} className="border-b hover:bg-gray-50">
+            <tr key={lesson.id} className="border-b border-border-light hover:bg-hover-blue">
               <td className="px-4 py-4">
                 <Checkbox.Root 
                   className="flex h-4 w-4 appearance-none items-center justify-center rounded border border-gray-300 bg-white"
@@ -89,7 +89,7 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                   onCheckedChange={(checked) => handleSelectRow(lesson.id, checked === true)}
                   aria-label={`Select ${lesson.student.name}`}
                 >
-                  <Checkbox.Indicator className="text-primary">
+                  <Checkbox.Indicator className="text-[#1a1a3f]">
                     <CheckIcon />
                   </Checkbox.Indicator>
                 </Checkbox.Root>
@@ -104,15 +104,15 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                     />
                   </div>
                   <div>
-                    <div className="font-medium text-gray-900">{lesson.student.name}</div>
-                    <div className="text-sm text-gray-500">{lesson.student.email}</div>
+                    <div className="text-sm font-medium text-text-dark">{lesson.student.name}</div>
+                    <div className="text-xs text-gray-500">{lesson.student.email}</div>
                   </div>
                 </div>
               </td>
               <td className="px-4 py-4">
                 <div className="flex items-center">
                   <span className="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center mr-2">
-                    <svg className="h-4 w-4 text-gray-600" viewBox="0 0 24 24" fill="none">
+                    <svg className="h-4 w-4 text-gray-500" viewBox="0 0 24 24" fill="none">
                       <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
@@ -120,23 +120,23 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                 </div>
               </td>
               <td className="px-4 py-4">
-                <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+                <span className="px-3 py-1 text-xs rounded-full bg-green-100 text-success">
                   {lesson.status}
                 </span>
               </td>
               <td className="px-4 py-4">
-                <div className="text-sm text-gray-900">{lesson.dateTime.date}</div>
-                <div className="text-sm text-gray-500">{lesson.dateTime.time}</div>
+                <div className="text-sm text-text-dark">{lesson.dateTime.date}</div>
+                <div className="text-xs text-gray-500">{lesson.dateTime.time}</div>
               </td>
               <td className="px-4 py-4">
                 <div className="flex items-center">
-                  <span className="inline-flex items-center">
-                    <img src="/flags/en.svg" alt="English" className="h-4 w-4 mr-1" />
+                  <span className="inline-flex items-center gap-1">
+                    <img src="/flags/en.svg" alt="English" className="w-5 h-5" />
                     <span>{lesson.languages.from}</span>
                   </span>
-                  <span className="mx-2">to</span>
-                  <span className="inline-flex items-center">
-                    <img src="/flags/de.svg" alt="German" className="h-4 w-4 mr-1" />
+                  <span className="text-xs text-gray-500 mx-1">to</span>
+                  <span className="inline-flex items-center gap-1">
+                    <img src="/flags/de.svg" alt="German" className="w-5 h-5" />
                     <span>{lesson.languages.to}</span>
                   </span>
                 </div>
@@ -147,12 +147,12 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                     variant="outline" 
                     size="sm" 
                     onClick={() => onPrepareCall?.(lesson.id)}
-                    className="text-secondary"
+                    className="text-sm text-indigo-600 hover:text-indigo-800"
                   >
                     Prepare call
                   </Button>
                   <button 
-                    className="p-2 rounded-full bg-success text-white"
+                    className="p-2 rounded-full bg-success text-white hover:bg-success/90"
                     onClick={() => onStartCall?.(lesson.id)}
                     data-testid={`call-button-${lesson.id}`}
                     aria-label="Start call"
@@ -162,7 +162,7 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                     </svg>
                   </button>
                   <button 
-                    className="p-2 rounded-full bg-danger text-white"
+                    className="p-2 rounded-full bg-danger text-white hover:bg-danger/90"
                     onClick={() => onCancelLesson?.(lesson.id)}
                     data-testid={`cancel-button-${lesson.id}`}
                     aria-label="Cancel lesson"
@@ -172,7 +172,7 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                     </svg>
                   </button>
                   <button 
-                    className="p-2 rounded-full bg-gray-200 text-gray-600"
+                    className="p-2 rounded-full bg-gray-200 text-gray-500 hover:bg-gray-300"
                     aria-label="More information"
                   >
                     <InfoCircledIcon className="h-4 w-4" />

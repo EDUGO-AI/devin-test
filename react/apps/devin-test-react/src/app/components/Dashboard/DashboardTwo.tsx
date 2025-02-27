@@ -172,11 +172,11 @@ const DashboardTwo: React.FC = () => {
   return (
     <Layout activeNavItem="dashboard">
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-gray-800">Dashboard</h1>
-        <p className="text-gray-600">Welcome, Joaquin</p>
+        <h1 className="text-2xl font-semibold text-text-dark mb-1">Dashboard</h1>
+        <p className="text-text-medium mb-6">Welcome, Joaquin</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-2 gap-6 mb-6">
         <Dialog.Root open={isCreateLessonOpen} onOpenChange={setIsCreateLessonOpen}>
           <Dialog.Trigger asChild>
             <div>
@@ -270,17 +270,17 @@ const DashboardTwo: React.FC = () => {
         />
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <div className="flex justify-between items-center mb-6">
+      <div className="bg-white rounded-lg shadow-sm p-6 mt-6">
+        <div className="flex justify-between items-center mb-4">
           <div>
-            <h2 className="text-lg font-medium">My upcoming lessons</h2>
+            <h2 className="text-lg font-medium text-text-dark">My upcoming lessons</h2>
             <div className="text-sm text-gray-500">100 lessons</div>
           </div>
           <div className="relative">
             <input
               type="text"
               placeholder="Search"
-              className="pl-8 pr-4 py-2 border border-gray-300 rounded-full w-[300px]"
+              className="pl-8 pr-4 py-2 border border-gray-300 rounded-full w-[300px] text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             <svg
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
