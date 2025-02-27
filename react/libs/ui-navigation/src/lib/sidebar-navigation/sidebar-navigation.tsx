@@ -305,3 +305,162 @@ export function SidebarNavigation({ activeItem }: SidebarNavigationProps) {
 }
 
 export default SidebarNavigation;
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { 
+  Home, User, BookOpen, MessageSquare, Users, Calendar, 
+  Clock, MessageCircle, Users as UsersGroup, FileText, 
+  Layers, Book, Library, Plus
+} from 'lucide-react';
+import './sidebar-navigation.css';
+
+interface SidebarNavigationProps {
+  activeItem?: string;
+}
+
+export function SidebarNavigation({ activeItem }: SidebarNavigationProps) {
+  const location = useLocation();
+  const [sectionStates, setSectionStates] = useState({
+    students: true,
+    liveLessons: true,
+    content: true
+  });
+
+  const toggleSection = (section: keyof typeof sectionStates) => {
+    setSectionStates(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  const isActive = (id: string) => {
+    if (activeItem) {
+      return activeItem === id;
+    }
+    return location.pathname.includes(id.toLowerCase());
+  };
+
+  // Menu sections with their items
+  const menuSections = [
+    {
+      items: [
+        { id: 'dashboard', label: 'Dashboard', path: '/dashboard', icon: <Home size={20} /> },
+        { id: 'account', label: 'My Account', path: '/account', icon: <User size={20} /> },
+        { id: 'teaching-history', label: 'My Teaching History', path: '/teaching-history', icon: <BookOpen size={20} /> },
+      ]
+    },
+    {
+      id: 'students',
+      title: 'STUDENTS',
+      items: [
+        { id: 'messages', label: 'My Messages', path: '/messages', icon: <MessageSquare size={20} /> },
+        { id: 'students', label: 'My Students', path: '/students', icon: <Users size={20} /> },
+      ]
+    },
+    {
+      id: 'liveLessons',
+      title: 'MY LIVE LESSONS',
+      items: [
+        { id: 'calendar', label: 'My Calendar', path: '/calendar', icon: <Calendar size={20} /> },
+        { id: 'availability', label: 'My Availability', path: '/availability', icon: <Clock size={20} /> },
+        { id: 'live-lessons', label: 'My Live Lessons', path: '/live-lessons', icon: <MessageCircle size={20} /> },
+        { id: 'group-lessons', label: 'My Group Lessons', path: '/group-lessons', icon: <UsersGroup size={20} /> },
+        { id: 'lesson-reports', label: 'My Lesson Reports', path: '/lesson-reports', icon: <FileText size={20} /> },
+      ]
+    },
+    {
+      id: 'content',
+      title: 'MY CONTENT',
+      items: [
+        { id: 'lessons', label: 'My Lessons', path: '/lessons', icon: <Layers size={20} />, hasAdd: true },
+        { id: 'courses', label: 'My Courses', path: '/courses', icon: <Book size={20} />, hasAdd: true },
+        { id: 'content-library', label: 'Content Library', path: '/content-library', icon: <Library size={20} /> },
+      ]
+    }
+  ];
+
+  return (
+    <div className="w-56 h-screen bg-white border-r border-gray-200 flex flex-col shadow-sm">
+      {/* Logo */}
+      <div className="p-4 flex items-center">
+        <img 
+          src="https://i.ibb.co/ypkgK0X/blue-beanie.png" 
+          alt="edugoal" 
+          className="h-8" 
+        />
+      </div>
+
+      {/* Menu Items */}
+      <div className="flex-1 overflow-y-auto">
+        {menuSections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className="mb-2">
+            {section.title && (
+              <div 
+                className="px-4 py-2 text-xs font-semibold text-gray-500 cursor-pointer flex items-center justify-between"
+                onClick={() => section.id && toggleSection(section.id as keyof typeof sectionStates)}
+              >
+                {section.title}
+                {section.id && (
+                  <span className="text-gray-400">
+                    {sectionStates[section.id as keyof typeof sectionStates] ? '▼' : '►'}
+                  </span>
+                )}
+              </div>
+            )}
+            {section.items.map((item) => {
+              // Skip rendering if the section is collapsed
+              if (section.id && !sectionStates[section.id as keyof typeof sectionStates]) {
+                return null;
+              }
+              
+              const active = isActive(item.id);
+              
+              return (
+                <Link 
+                  key={item.id}
+                  to={item.path}
+                  className={`flex items-center justify-between px-4 py-3 cursor-pointer ${
+                    active 
+                      ? 'bg-indigo-600 bg-opacity-10 text-indigo-600' 
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <span className={`mr-3 ${active ? 'text-indigo-600' : 'text-gray-500'}`}>{item.icon}</span>
+                    <span className={`text-sm ${active ? 'font-medium' : ''}`}>{item.label}</span>
+                  </div>
+                  {item.hasAdd && (
+                    <button className="p-1 text-gray-400 hover:text-gray-600">
+                      <Plus size={16} />
+                    </button>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+
+      {/* User Profile */}
+      <div className="border-t border-gray-200 p-4">
+        <div className="flex items-center">
+          <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0 overflow-hidden">
+            <img 
+              src="https://i.ibb.co/VQdtZhV/avatar-place-holder.png" 
+              alt="Profile" 
+              className="w-full h-full object-cover" 
+            />
+          </div>
+          <div className="ml-3">
+            <div className="text-sm font-medium">Joaquín Trainer</div>
+            <div className="text-xs text-gray-500">
+              <span className="cursor-pointer hover:underline">Edit Profile</span> · 
+              <span className="cursor-pointer hover:underline ml-1">Log Out</span>
+            </div>
+            <div className="text-xs text-blue-500 mt-1">Europe/Berlin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

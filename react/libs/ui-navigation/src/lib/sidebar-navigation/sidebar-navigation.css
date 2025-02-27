@@ -194,3 +194,20 @@
   color: #6b7280;
   font-size: 11px;
 }
+.sidebar-navigation-enter {
+  transform: translateX(-100%);
+}
+
+.sidebar-navigation-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+
+.sidebar-navigation-exit {
+  transform: translateX(0);
+}
+
+.sidebar-navigation-exit-active {
+  transform: translateX(-100%);
+  transition: transform 300ms;
+}
