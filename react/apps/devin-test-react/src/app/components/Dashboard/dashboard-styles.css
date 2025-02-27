@@ -1,0 +1,75 @@
+/* Override any conflicting styles */
+body {
+  background-color: white !important;
+  color: #333 !important;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif !important;
+}
+
+/* Sidebar styles */
+aside {
+  background-color: white !important;
+  color: #333 !important;
+}
+
+/* Action card styles */
+.bg-white {
+  background-color: white !important;
+}
+
+/* Dashboard container */
+.bg-primary {
+  background-color: white !important;
+}
+
+/* Text colors */
+.text-gray-800 {
+  color: #333 !important;
+}
+
+/* Border colors */
+.border-gray-200 {
+  border-color: #e5e7eb !important;
+}
+
+/* Hover states */
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6 !important;
+}
+
+/* Active states */
+.bg-secondary {
+  background-color: #4353FF !important;
+}
+
+.bg-opacity-10 {
+  --tw-bg-opacity: 0.1 !important;
+}
+
+.text-secondary {
+  color: #4353FF !important;
+}
+
+/* Button styles */
+button {
+  background-color: #4353FF !important;
+  color: white !important;
+}
+
+button[variant="outline"] {
+  background-color: transparent !important;
+  color: #4353FF !important;
+  border: 1px solid #4353FF !important;
+}
+
+/* Table styles */
+table {
+  background-color: white !important;
+}
+
+th {
+  color: #6b7280 !important;
+}
+
+td {
+  color: #333 !important;
+}

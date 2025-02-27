@@ -10,12 +10,50 @@ interface ActionCardProps {
 
 const ActionCard: React.FC<ActionCardProps> = ({ title, icon, illustration, onClick }) => (
   <div 
-    className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center cursor-pointer hover:shadow-lg transition-shadow" 
+    style={{
+      backgroundColor: 'white',
+      borderRadius: '0.5rem',
+      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+      padding: '2rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+      border: '1px solid #e5e7eb',
+      height: '100%',
+      position: 'relative',
+      overflow: 'hidden'
+    }}
+    onMouseOver={(e) => {
+      e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+      e.currentTarget.style.transform = 'translateY(-2px)';
+    }}
+    onMouseOut={(e) => {
+      e.currentTarget.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1)';
+      e.currentTarget.style.transform = 'translateY(0)';
+    }}
     onClick={onClick}
   >
-    <img src={illustration} alt="" className="h-32 mb-4" />
-    <div className="flex items-center gap-2 text-primary font-medium">
-      <span className="w-6 h-6 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary">
+    <img src={illustration} alt="" style={{ height: '10rem', marginBottom: '1.5rem' }} />
+    <div style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      gap: '0.5rem', 
+      color: '#111827', 
+      fontWeight: '500',
+      fontSize: '0.95rem'
+    }}>
+      <span style={{ 
+        width: '1.5rem', 
+        height: '1.5rem', 
+        backgroundColor: 'rgba(67, 83, 255, 0.1)', 
+        borderRadius: '9999px', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        color: '#4353FF' 
+      }}>
         {icon}
       </span>
       <span>{title}</span>
