@@ -1,4 +1,7 @@
 {
+  "buildCommand": "cd react && npm install && npx nx build devin-test-react",
+  "outputDirectory": "react/dist/apps/devin-test-react",
+  "framework": "vite",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
