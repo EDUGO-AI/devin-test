@@ -138,7 +138,7 @@ const mockLessons = [
 
 const DashboardTwo: React.FC = () => {
   const [isCreateLessonOpen, setIsCreateLessonOpen] = useState(false);
-  const [selectedLessons, setSelectedLessons] = useState<Record<string, boolean>>({});
+  const [, setSelectedLessons] = useState<Record<string, boolean>>({});
 
   const handleSelectLesson = (id: string, selected: boolean) => {
     setSelectedLessons(prev => ({

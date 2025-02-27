@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../tests/test-utils';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SidebarNavigation from './SidebarNavigation';
 import '@testing-library/jest-dom';
