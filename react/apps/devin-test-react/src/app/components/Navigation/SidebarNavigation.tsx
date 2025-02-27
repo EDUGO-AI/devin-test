@@ -1,6 +1,5 @@
 import React from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { Link } from 'react-router-dom';
 
 interface NavItem {
   id: string;
