@@ -18,3 +18,7 @@ author = 813300
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd react && npx nx serve devin-test-react"
+
+[[ports]]
+localPort = 4202
+externalPort = 80
