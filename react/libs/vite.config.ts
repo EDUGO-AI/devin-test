@@ -10,6 +10,12 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   root: __dirname,
   cacheDir: '../node_modules/.vite/libs',
+  server: {
+    hmr: {
+      clientPort: 443,
+      protocol: 'wss',
+    }
+  },
   plugins: [
     react(),
     nxViteTsPaths(),

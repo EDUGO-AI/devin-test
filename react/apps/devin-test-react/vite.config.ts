@@ -11,6 +11,10 @@ export default defineConfig({
   server: {
     port: 4200,
     host: '0.0.0.0',
+    hmr: {
+      clientPort: 443,
+      protocol: 'wss',
+    },
     // Adding allowedHosts as per the request
     allowedHosts: [
       'aa0ca949-72c8-49a3-ae59-b8965f218363-00-l5wkurac8ax1.kirk.replit.dev',
