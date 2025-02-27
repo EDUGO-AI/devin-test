@@ -1,29 +1,42 @@
-
-.app {
+.app-container {
   display: flex;
   min-height: 100vh;
+  background-color: #f5f6fa;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #2196F3; /* Darker blue */
+  color: white;
+  padding: 20px;
+  overflow-y: auto; /* Add scroll if content exceeds height */
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar a:hover {
+  background-color: #1976D2; /* Slightly darker hover effect */
 }
 
 .main-content {
   flex: 1;
-  padding: 1.5rem;
-}
-
-
-.app {
-  display: flex;
-  min-height: 100vh;
-  background-color: #f9fafb;
-}
-
-.main-content {
-  flex-grow: 1;
-  margin-left: 240px; /* Match the sidebar width */
-  overflow-x: hidden;
+  padding: 24px;
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
-  .main-content {
-    margin-left: 64px; /* Match the collapsed sidebar width */
+  .sidebar {
+    width: 64px;
+  }
+  .sidebar a {
+    padding: 5px;
+  }
+  .sidebar a > * { /* Hide text on smaller screens */
+    display: none;
   }
 }

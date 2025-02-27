@@ -7,15 +7,15 @@ import './App.css';
 const App = () => {
   return (
     <Router>
-      <div className="app flex bg-gray-100 min-h-screen">
+      <div className="app-container">
         <SidebarNavigation activeItem="dashboard" />
-        <div className="main-content flex-1 p-6">
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardTwo />} />
             <Route path="/dashboard-two" element={<DashboardTwo />} />
           </Routes>
-        </div>
+        </main>
       </div>
     </Router>
   );
