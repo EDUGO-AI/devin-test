@@ -10,12 +10,12 @@ interface ActionCardProps {
 
 const ActionCard: React.FC<ActionCardProps> = ({ title, icon, illustration, onClick }) => (
   <div 
-    className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center cursor-pointer hover:shadow-lg transition-shadow" 
+    className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col items-center justify-between h-[250px] cursor-pointer" 
     onClick={onClick}
   >
     <img src={illustration} alt="" className="h-32 mb-4" />
-    <div className="flex items-center gap-2 text-primary font-medium">
-      <span className="w-6 h-6 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary">
+    <div className="flex items-center gap-2 text-[#1a1a3f] font-medium">
+      <span className="w-6 h-6 bg-[#1a1a3f] bg-opacity-10 rounded-full flex items-center justify-center text-[#1a1a3f]">
         {icon}
       </span>
       <span>{title}</span>
