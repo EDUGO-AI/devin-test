@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@devin-test/ui-navigation": ["libs/src/index.ts"],
+      "@devin-test/ui-navigation-lib": ["libs/ui-navigation/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
