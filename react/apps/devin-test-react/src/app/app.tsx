@@ -1,11 +1,11 @@
 // Uncomment this line to use CSS modules
 // import styles from './app.module.css';
-import NxWelcome from './nx-welcome';
+import DashboardOne from '../components/dashboard/DashboardOne';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="devin-test-react" />
+      <DashboardOne />
     </div>
   );
 }
