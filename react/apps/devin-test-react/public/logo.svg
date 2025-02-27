@@ -1,0 +1,5 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 10C15.5228 10 20 14.4772 20 20C20 25.5228 15.5228 30 10 30C4.47715 30 0 25.5228 0 20C0 14.4772 4.47715 10 10 10Z" fill="#4353FF"/>
+  <path d="M30 10C35.5228 10 40 14.4772 40 20C40 25.5228 35.5228 30 30 30C24.4772 30 20 25.5228 20 20C20 14.4772 24.4772 10 30 10Z" fill="#1a1a3f"/>
+  <text x="45" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">edugo.ai</text>
+</svg>
