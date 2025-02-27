@@ -1,262 +1,302 @@
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './sidebar-navigation.css';
 
-export interface SidebarNavigationProps {
+interface NavItem {
+  id: string;
+  label: string;
+  path: string;
+  icon: React.ReactNode;
+}
+
+interface SidebarNavigationProps {
   activeItem?: string;
 }
 
 export function SidebarNavigation({ activeItem }: SidebarNavigationProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const [expanded, setExpanded] = useState(true);
+  const [sectionStates, setSectionStates] = useState({
+    students: true,
+    liveLessons: true,
+    content: true
+  });
 
-  const isActive = (item: string) => activeItem === item;
-
-  const NavItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', path: '/dashboard-two' },
-    { id: 'account', label: 'My Account', icon: 'account', path: '#' },
-    { id: 'teaching-history', label: 'My Teaching History', icon: 'history', path: '#' },
-  ];
-
-  const StudentItems = [
-    { id: 'messages', label: 'My Messages', icon: 'messages', path: '#' },
-    { id: 'students', label: 'My Students', icon: 'students', path: '#' },
-  ];
-
-  const LiveLessonItems = [
-    { id: 'calendar', label: 'My Calendar', icon: 'calendar', path: '#' },
-    { id: 'availability', label: 'My Availability', icon: 'availability', path: '#' },
-    { id: 'live-lessons', label: 'My Live Lessons', icon: 'live', path: '#' },
-    { id: 'group-lessons', label: 'My Group Lessons', icon: 'group', path: '#' },
-    { id: 'reports', label: 'My Lesson Reports', icon: 'reports', path: '#' },
-  ];
-
-  const ContentItems = [
-    { id: 'lessons', label: 'My Lessons', icon: 'lessons', path: '#' },
-    { id: 'courses', label: 'My Courses', icon: 'courses', path: '#' },
-    { id: 'library', label: 'Content Library', icon: 'library', path: '#' },
-  ];
-
-  const renderIcon = (icon: string) => {
-    switch (icon) {
-      case 'dashboard':
-        return (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 3H3V10H10V3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M21 3H14V10H21V3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M21 14H14V21H21V14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M10 14H3V21H10V14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        );
-      case 'account':
-        return (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        );
-      case 'history':
-        return (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 8V12L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M3.05078 11.0002C3.27939 8.80966 4.30746 6.76518 5.93254 5.27208C7.55763 3.77897 9.6747 2.93296 11.8847 2.88768C14.0946 2.84239 16.2493 3.60067 17.9361 5.02388C19.6229 6.4471 20.7279 8.43469 21.0418 10.6125C21.3557 12.7904 20.8559 15.0041 19.641 16.8295C18.426 18.6549 16.5782 19.9715 14.4307 20.5223C12.2833 21.073 10.0121 20.8239 8.03639 19.8191C6.0607 18.8143 4.51339 17.1226 3.68542 15.0502" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        );
-      case 'messages':
-        return (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M22 6L12 13L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        );
-      case 'students':
-        return (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        );
-      case 'calendar':
-        return (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        );
-      default:
-        return (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L19.0711 7L19.0711 17L12 22L4.92893 17L4.92893 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        );
-    }
+  const toggleSection = (section: keyof typeof sectionStates) => {
+    setSectionStates(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
   };
 
-  const renderNavItem = (item: any) => (
+  const isActive = (id: string) => {
+    if (activeItem) {
+      return activeItem === id;
+    }
+    return location.pathname.includes(id.toLowerCase());
+  };
+
+  const MainItems: NavItem[] = [
+    {
+      id: 'dashboard',
+      label: 'Dashboard',
+      path: '/dashboard-two',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V4zM8 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H9a1 1 0 01-1-1V4zM15 3a1 1 0 00-1 1v12a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2z" />
+        </svg>
+      )
+    },
+    {
+      id: 'account',
+      label: 'My Account',
+      path: '/account',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+        </svg>
+      )
+    },
+    {
+      id: 'teaching-history',
+      label: 'My Teaching History',
+      path: '/teaching-history',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+        </svg>
+      )
+    }
+  ];
+
+  const StudentItems: NavItem[] = [
+    {
+      id: 'messages',
+      label: 'My Messages',
+      path: '/messages',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+          <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
+        </svg>
+      )
+    },
+    {
+      id: 'students',
+      label: 'My Students',
+      path: '/students',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+        </svg>
+      )
+    }
+  ];
+
+  const LiveLessonItems: NavItem[] = [
+    {
+      id: 'calendar',
+      label: 'My Calendar',
+      path: '/calendar',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+        </svg>
+      )
+    },
+    {
+      id: 'availability',
+      label: 'My Availability',
+      path: '/availability',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+        </svg>
+      )
+    },
+    {
+      id: 'live-lessons',
+      label: 'My Live Lessons',
+      path: '/live-lessons',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+        </svg>
+      )
+    },
+    {
+      id: 'group-lessons',
+      label: 'My Group Lessons',
+      path: '/group-lessons',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+        </svg>
+      )
+    },
+    {
+      id: 'lesson-reports',
+      label: 'My Lesson Reports',
+      path: '/lesson-reports',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clipRule="evenodd" />
+        </svg>
+      )
+    }
+  ];
+
+  const ContentItems: NavItem[] = [
+    {
+      id: 'lessons',
+      label: 'My Lessons',
+      path: '/lessons',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+        </svg>
+      )
+    },
+    {
+      id: 'courses',
+      label: 'My Courses',
+      path: '/courses',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+        </svg>
+      )
+    },
+    {
+      id: 'library',
+      label: 'Content Library',
+      path: '/library',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+        </svg>
+      )
+    }
+  ];
+
+  const renderNavItem = (item: NavItem) => (
     <li key={item.id} className="mb-1">
       <Link
         to={item.path}
-        className={`flex items-center py-2 px-4 rounded-md text-sm ${
+        className={`flex items-center px-4 py-2 rounded-lg text-sm ${
           isActive(item.id)
             ? 'bg-indigo-50 text-indigo-600 font-medium'
-            : 'text-gray-700 hover:bg-gray-100'
+            : 'text-gray-600 hover:bg-gray-100'
         }`}
       >
         <span className="inline-flex items-center justify-center w-6 h-6 mr-3">
-          {renderIcon(item.icon)}
+          {item.icon}
         </span>
-        {item.label}
+        {expanded && <span>{item.label}</span>}
       </Link>
     </li>
   );
 
   return (
     <>
-      {/* Mobile menu button */}
-      <button
-        type="button"
-        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      >
-        <span className="sr-only">Open sidebar</span>
-        <svg
-          className="h-6 w-6"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-          />
-        </svg>
-      </button>
-
-      {/* Sidebar for mobile */}
-      <div 
-        className={`fixed inset-0 flex z-30 md:hidden transform ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out`}
-      >
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setIsMobileMenuOpen(false)}></div>
-
-        <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
-          <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-            <div className="flex items-center px-4 mb-6">
-              <img
-                className="h-8"
-                src="/assets/edugo-logo.svg"
-                alt="edugo.ai"
-              />
+      <div className={`sidebar ${expanded ? 'expanded' : 'collapsed'}`}>
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
+            <div className="flex items-center">
+              <img src="/assets/edugo-logo.svg" alt="edugo.ai" className="h-8" />
+              {expanded && <span className="ml-2 text-xl font-semibold">edugo.ai</span>}
             </div>
-
-            <nav className="sidebar-nav">
-              <ul>
-                {NavItems.map(renderNavItem)}
-              </ul>
-
-              <div className="mt-8 mb-2 px-4">
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  STUDENTS
-                </h3>
-              </div>
-              <ul>
-                {StudentItems.map(renderNavItem)}
-              </ul>
-
-              <div className="mt-8 mb-2 px-4">
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  MY LIVE LESSONS
-                </h3>
-              </div>
-              <ul>
-                {LiveLessonItems.map(renderNavItem)}
-              </ul>
-
-              <div className="mt-8 mb-2 px-4">
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  MY CONTENT
-                </h3>
-              </div>
-              <ul>
-                {ContentItems.map(renderNavItem)}
-              </ul>
-            </nav>
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="p-1 rounded-md text-gray-500 hover:bg-gray-100"
+            >
+              {expanded ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
+              )}
+            </button>
           </div>
+
+          <nav className="flex-1 overflow-y-auto py-4">
+            <ul className="mb-6">
+              {MainItems.map(renderNavItem)}
+            </ul>
+
+            <div className="mt-8 mb-2 px-4">
+              <div 
+                className="flex items-center justify-between cursor-pointer"
+                onClick={() => toggleSection('students')}
+              >
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  {expanded ? 'STUDENTS' : 'ST'}
+                </h3>
+                {expanded && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 text-gray-500 transition-transform ${sectionStates.students ? 'rotate-0' : '-rotate-90'}`} viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </div>
+            </div>
+            <ul className={`${!sectionStates.students && 'hidden'}`}>
+              {StudentItems.map(renderNavItem)}
+            </ul>
+
+            <div className="mt-8 mb-2 px-4">
+              <div 
+                className="flex items-center justify-between cursor-pointer"
+                onClick={() => toggleSection('liveLessons')}
+              >
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  {expanded ? 'MY LIVE LESSONS' : 'LL'}
+                </h3>
+                {expanded && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 text-gray-500 transition-transform ${sectionStates.liveLessons ? 'rotate-0' : '-rotate-90'}`} viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </div>
+            </div>
+            <ul className={`${!sectionStates.liveLessons && 'hidden'}`}>
+              {LiveLessonItems.map(renderNavItem)}
+            </ul>
+
+            <div className="mt-8 mb-2 px-4">
+              <div 
+                className="flex items-center justify-between cursor-pointer"
+                onClick={() => toggleSection('content')}
+              >
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  {expanded ? 'MY CONTENT' : 'CT'}
+                </h3>
+                {expanded && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 text-gray-500 transition-transform ${sectionStates.content ? 'rotate-0' : '-rotate-90'}`} viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </div>
+            </div>
+            <ul className={`${!sectionStates.content && 'hidden'}`}>
+              {ContentItems.map(renderNavItem)}
+            </ul>
+          </nav>
 
           <div className="flex-shrink-0 flex items-center border-t p-4">
             <div className="flex-shrink-0">
               <img className="h-10 w-10 rounded-full" src="/assets/avatar.png" alt="User avatar" />
             </div>
-            <div className="ml-3">
-              <p className="text-sm font-medium text-gray-900">Joaquin Trainer</p>
-              <p className="text-xs text-gray-500">Full Profile</p>
-              <p className="text-xs text-gray-500">Europe/Berlin</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Sidebar for desktop */}
-      <div className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:w-64 md:border-r md:border-gray-200 md:bg-white">
-        <div className="flex items-center h-16 px-6 border-b border-gray-200">
-          <img
-            className="h-8"
-            src="/assets/edugo-logo.svg"
-            alt="edugo.ai"
-          />
-        </div>
-
-        <div className="flex-1 flex flex-col overflow-y-auto">
-          <nav className="flex-1 py-4 sidebar-nav">
-            <ul>
-              {NavItems.map(renderNavItem)}
-            </ul>
-
-            <div className="mt-8 mb-2 px-4">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                STUDENTS
-              </h3>
-            </div>
-            <ul>
-              {StudentItems.map(renderNavItem)}
-            </ul>
-
-            <div className="mt-8 mb-2 px-4">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                MY LIVE LESSONS
-              </h3>
-            </div>
-            <ul>
-              {LiveLessonItems.map(renderNavItem)}
-            </ul>
-
-            <div className="mt-8 mb-2 px-4">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                MY CONTENT
-              </h3>
-            </div>
-            <ul>
-              {ContentItems.map(renderNavItem)}
-            </ul>
-          </nav>
-        </div>
-
-        <div className="flex-shrink-0 flex items-center border-t p-4">
-          <div className="flex-shrink-0">
-            <img className="h-10 w-10 rounded-full" src="/assets/avatar.png" alt="User avatar" />
-          </div>
-          <div className="ml-3">
-            <p className="text-sm font-medium text-gray-900">Joaquin Trainer</p>
-            <p className="text-xs text-gray-500">Full Profile</p>
-            <p className="text-xs text-gray-500">Europe/Berlin</p>
+            {expanded && (
+              <div className="ml-3">
+                <p className="text-sm font-medium text-gray-900">Joaquin Trainer</p>
+                <p className="text-xs text-gray-500">Full Profile</p>
+                <p className="text-xs text-gray-500">Europe/Berlin</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
