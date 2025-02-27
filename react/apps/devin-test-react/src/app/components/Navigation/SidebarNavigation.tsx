@@ -25,16 +25,43 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
   const isActive = (itemName: string) => activeItem === itemName;
 
   return (
-    <aside className="w-[200px] bg-primary h-screen fixed left-0 top-0 text-white">
-      <div className="h-[70px] flex items-center px-4 border-b border-primary-700">
-        <img src="/logo.svg" alt="edugo.ai" className="h-8" />
+    <aside style={{ 
+      width: '200px', 
+      backgroundColor: 'white', 
+      height: '100vh', 
+      position: 'fixed', 
+      left: 0, 
+      top: 0, 
+      color: '#111827', 
+      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)', 
+      zIndex: 50,
+      borderRight: '1px solid #e5e7eb'
+    }}>
+      <div style={{ 
+        height: '70px', 
+        display: 'flex', 
+        alignItems: 'center', 
+        padding: '0 16px', 
+        borderBottom: '1px solid #e5e7eb' 
+      }}>
+        <img src="/logo.svg" alt="edugo.ai" style={{ height: '32px' }} />
       </div>
       <NavigationMenu.Root className="flex flex-col w-full" orientation="vertical">
         <NavigationMenu.List className="flex flex-col w-full">
           <NavigationMenu.Item className="w-full">
             <Link 
               to="/dashboard-two" 
-              className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('dashboard') ? 'bg-white bg-opacity-20' : ''}`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '12px 16px',
+                color: isActive('dashboard') ? '#4353FF' : '#111827',
+                backgroundColor: isActive('dashboard') ? 'rgba(67, 83, 255, 0.1)' : 'transparent',
+                textDecoration: 'none',
+                fontWeight: isActive('dashboard') ? '500' : 'normal',
+                borderRadius: '4px',
+                margin: '0 8px'
+              }}
             >
               <span className="w-6 h-6 mr-2 flex items-center justify-center">
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -49,7 +76,15 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
           <NavigationMenu.Item className="w-full">
             <Link 
               to="/account" 
-              className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('account') ? 'bg-white bg-opacity-20' : ''}`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '12px 16px',
+                color: isActive('account') ? '#4353FF' : '#111827',
+                backgroundColor: isActive('account') ? 'rgba(67, 83, 255, 0.1)' : 'transparent',
+                textDecoration: 'none',
+                fontWeight: isActive('account') ? '500' : 'normal'
+              }}
             >
               <span className="w-6 h-6 mr-2 flex items-center justify-center">
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -64,7 +99,15 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
           <NavigationMenu.Item className="w-full">
             <Link 
               to="/teaching-history" 
-              className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('teaching-history') ? 'bg-white bg-opacity-20' : ''}`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '12px 16px',
+                color: isActive('teaching-history') ? '#4353FF' : '#111827',
+                backgroundColor: isActive('teaching-history') ? 'rgba(67, 83, 255, 0.1)' : 'transparent',
+                textDecoration: 'none',
+                fontWeight: isActive('teaching-history') ? '500' : 'normal'
+              }}
             >
               <span className="w-6 h-6 mr-2 flex items-center justify-center">
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -81,7 +124,19 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
             <Collapsible.Root open={openSections.students}>
               <Collapsible.Trigger asChild>
                 <button 
-                  className="flex items-center justify-between w-full px-4 py-2 text-xs font-semibold text-gray-400"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    padding: '8px 16px',
+                    fontSize: '0.75rem',
+                    fontWeight: '600',
+                    color: '#6B7280',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
                   onClick={() => toggleSection('students')}
                 >
                   <span>STUDENTS</span>
@@ -92,7 +147,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/messages" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('messages') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('messages') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -106,7 +161,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/students" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('students') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('students') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -126,7 +181,19 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
             <Collapsible.Root open={openSections.liveLessons}>
               <Collapsible.Trigger asChild>
                 <button 
-                  className="flex items-center justify-between w-full px-4 py-2 text-xs font-semibold text-gray-400"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    padding: '8px 16px',
+                    fontSize: '0.75rem',
+                    fontWeight: '600',
+                    color: '#6B7280',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
                   onClick={() => toggleSection('liveLessons')}
                 >
                   <span>MY LIVE LESSONS</span>
@@ -137,7 +204,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/calendar" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('calendar') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('calendar') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -151,7 +218,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/availability" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('availability') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('availability') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -165,7 +232,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/live-lessons" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('live-lessons') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('live-lessons') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -179,7 +246,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/group-lessons" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('group-lessons') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('group-lessons') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -193,7 +260,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/lesson-reports" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('lesson-reports') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('lesson-reports') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -213,7 +280,19 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
             <Collapsible.Root open={openSections.content}>
               <Collapsible.Trigger asChild>
                 <button 
-                  className="flex items-center justify-between w-full px-4 py-2 text-xs font-semibold text-gray-400"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    padding: '8px 16px',
+                    fontSize: '0.75rem',
+                    fontWeight: '600',
+                    color: '#6B7280',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
                   onClick={() => toggleSection('content')}
                 >
                   <span>MY CONTENT</span>
@@ -224,7 +303,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/lessons" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('lessons') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('lessons') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -238,7 +317,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/courses" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('courses') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('courses') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -252,7 +331,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
                 <NavigationMenu.Item className="w-full">
                   <Link 
                     to="/content-library" 
-                    className={`flex items-center px-4 py-3 hover:bg-white hover:bg-opacity-10 ${isActive('content-library') ? 'bg-white bg-opacity-20' : ''}`}
+                    className={`flex items-center px-4 py-3 hover:bg-gray-100 ${isActive('content-library') ? 'bg-secondary bg-opacity-10 text-secondary' : ''}`}
                   >
                     <span className="w-6 h-6 mr-2 flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
@@ -269,14 +348,14 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
         </NavigationMenu.List>
       </NavigationMenu.Root>
       
-      <div className="absolute bottom-0 left-0 w-full p-4 border-t border-primary-700">
+      <div className="absolute bottom-0 left-0 w-full p-4 border-t border-gray-200">
         <div className="flex items-center">
           <div className="w-8 h-8 rounded-full bg-gray-300 mr-2 overflow-hidden">
             <img src="/avatar.jpg" alt="User" className="w-full h-full object-cover" />
           </div>
           <div>
             <div className="text-sm font-medium">Joaquin Trainer</div>
-            <div className="text-xs text-gray-400">Edugo/Berlin</div>
+            <div className="text-xs text-gray-500">Edugo/Berlin</div>
           </div>
         </div>
       </div>

@@ -8,9 +8,9 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, activeNavItem }) => {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'white' }}>
       <SidebarNavigation activeItem={activeNavItem} />
-      <div className="ml-[200px] w-[calc(100%-200px)] p-6">
+      <div style={{ marginLeft: '200px', width: 'calc(100% - 200px)', padding: '1.5rem' }}>
         {children}
       </div>
     </div>

@@ -18,7 +18,7 @@ describe('SidebarNavigation', () => {
     render(<SidebarNavigation activeItem="dashboard" />);
     
     const dashboardLink = screen.getByText('Dashboard').closest('a');
-    expect(dashboardLink).toHaveClass('bg-white bg-opacity-20');
+    expect(dashboardLink).toHaveClass('bg-secondary bg-opacity-10 text-secondary');
   });
   
   test('section headers toggle their sections when clicked', async () => {

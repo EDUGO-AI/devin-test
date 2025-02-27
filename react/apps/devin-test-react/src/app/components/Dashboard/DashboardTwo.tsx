@@ -6,6 +6,8 @@ import ActionCard from './ActionCard';
 import LessonsTable from '../Lessons/LessonsTable';
 import Button from '../UI/Button';
 
+// Remove the import of dashboard-styles.css as it's causing issues
+
 // Mock data for lessons
 const mockLessons = [
   {
@@ -171,12 +173,27 @@ const DashboardTwo: React.FC = () => {
 
   return (
     <Layout activeNavItem="dashboard">
-      <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-gray-800">Dashboard</h1>
-        <p className="text-gray-600">Welcome, Joaquin</p>
+      <div style={{ marginBottom: '2rem' }}>
+        <h1 style={{ 
+          fontSize: '2rem', 
+          fontWeight: '700', 
+          color: '#111827', 
+          marginBottom: '0.25rem',
+          letterSpacing: '-0.025em'
+        }}>Dashboard</h1>
+        <p style={{ 
+          color: '#4B5563', 
+          fontSize: '0.95rem'
+        }}>Welcome, Joaquin</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(2, 1fr)', 
+        gap: '2rem', 
+        marginBottom: '2.5rem',
+        maxWidth: '800px'
+      }}>
         <Dialog.Root open={isCreateLessonOpen} onOpenChange={setIsCreateLessonOpen}>
           <Dialog.Trigger asChild>
             <div>
@@ -270,20 +287,55 @@ const DashboardTwo: React.FC = () => {
         />
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <div className="flex justify-between items-center mb-6">
+      <div style={{ 
+        backgroundColor: 'white', 
+        borderRadius: '0.5rem', 
+        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)', 
+        padding: '1.5rem', 
+        marginBottom: '2rem',
+        border: '1px solid #e5e7eb'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <div>
-            <h2 className="text-lg font-medium">My upcoming lessons</h2>
-            <div className="text-sm text-gray-500">100 lessons</div>
+            <h2 style={{ 
+              fontSize: '1.25rem', 
+              fontWeight: '600', 
+              color: '#111827',
+              marginBottom: '0.25rem'
+            }}>My upcoming lessons</h2>
+            <div style={{ 
+              fontSize: '0.875rem', 
+              color: '#6B7280'
+            }}>100 lessons</div>
           </div>
-          <div className="relative">
+          <div style={{ position: 'relative' }}>
             <input
               type="text"
               placeholder="Search"
-              className="pl-8 pr-4 py-2 border border-gray-300 rounded-full w-[300px]"
+              style={{ 
+                paddingLeft: '2.5rem', 
+                paddingRight: '1rem', 
+                paddingTop: '0.5rem', 
+                paddingBottom: '0.5rem', 
+                border: '1px solid #E5E7EB', 
+                borderRadius: '9999px', 
+                width: '300px',
+                fontSize: '0.875rem',
+                outline: 'none',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                transition: 'all 0.2s ease'
+              }}
+              onFocus={(e) => e.currentTarget.style.borderColor = '#4353FF'}
+              onBlur={(e) => e.currentTarget.style.borderColor = '#E5E7EB'}
             />
             <svg
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              style={{ 
+                position: 'absolute', 
+                left: '1rem', 
+                top: '50%', 
+                transform: 'translateY(-50%)', 
+                color: '#9CA3AF' 
+              }}
               width="16"
               height="16"
               viewBox="0 0 24 24"
