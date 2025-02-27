@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "./apps/devin-test-react/src/**/*.{js,jsx,ts,tsx}",
+    "./libs/ui-components/src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
