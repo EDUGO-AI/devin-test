@@ -9,7 +9,7 @@ export default defineConfig({
   cacheDir: '../../node_modules/.vite/apps/devin-test-react',
   server: {
     port: 4200,
-    host: 'localhost',
+    host: '0.0.0.0',
   },
   preview: {
     port: 4300,
@@ -38,24 +38,5 @@ export default defineConfig({
       reportsDirectory: '../../coverage/apps/devin-test-react',
       provider: 'v8',
     },
-  },
-});
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-
-export default defineConfig({
-  root: __dirname,
-  build: {
-    outDir: '../../dist/apps/devin-test-react',
-    reportCompressedSize: true,
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
-  },
-  plugins: [react(), nxViteTsPaths()],
-  server: {
-    port: 4200,
-    host: '0.0.0.0',
   },
 });
