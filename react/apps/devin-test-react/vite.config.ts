@@ -44,12 +44,5 @@ export default defineConfig({
       provider: 'v8',
     },
   },
-  css: {
-    postcss: {
-      plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
-      ],
-    },
-  },
+  // Removing CSS PostCSS configuration
 });
