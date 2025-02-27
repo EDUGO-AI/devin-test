@@ -7,9 +7,6 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <header className="app-header">
-          <h1>Welcome to Devin Test React</h1>
-        </header>
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard-two" replace />} />
           <Route path="/dashboard-two" element={<DashboardTwo />} />
