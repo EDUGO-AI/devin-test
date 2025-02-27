@@ -9,7 +9,7 @@ export default defineConfig({
   cacheDir: '../../node_modules/.vite/apps/devin-test-react',
   server: {
     port: 4200,
-    host: 'localhost',
+    host: true,
   },
   preview: {
     port: 4300,
