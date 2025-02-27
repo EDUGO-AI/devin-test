@@ -10,6 +10,7 @@ export default defineConfig({
   server: {
     port: 4200,
     host: true,
+    allowedHosts: ['edugo-sidebar-nav-tunnel-u3hhg4n7.devinapps.com'],
   },
   preview: {
     port: 4300,
