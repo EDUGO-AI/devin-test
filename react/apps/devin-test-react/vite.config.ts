@@ -2,8 +2,8 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-// Using the @tailwindcss/vite plugin
-import tailwindcss from '@tailwindcss/vite';
+// Import tailwindcss directly instead of using @tailwindcss/vite
+import { plugin as tailwindcss } from 'tailwindcss/plugin';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 
