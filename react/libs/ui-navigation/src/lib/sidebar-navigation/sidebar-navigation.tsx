@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar-navigation.css';
 
@@ -8,292 +7,260 @@ export interface SidebarNavigationProps {
 }
 
 export function SidebarNavigation({ activeItem }: SidebarNavigationProps) {
-  const [openSections, setOpenSections] = React.useState({
-    students: true,
-    liveLessons: true,
-    content: true
-  });
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleSection = (section: keyof typeof openSections) => {
-    setOpenSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
+  const isActive = (item: string) => activeItem === item;
+
+  const NavItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', path: '/dashboard-two' },
+    { id: 'account', label: 'My Account', icon: 'account', path: '#' },
+    { id: 'teaching-history', label: 'My Teaching History', icon: 'history', path: '#' },
+  ];
+
+  const StudentItems = [
+    { id: 'messages', label: 'My Messages', icon: 'messages', path: '#' },
+    { id: 'students', label: 'My Students', icon: 'students', path: '#' },
+  ];
+
+  const LiveLessonItems = [
+    { id: 'calendar', label: 'My Calendar', icon: 'calendar', path: '#' },
+    { id: 'availability', label: 'My Availability', icon: 'availability', path: '#' },
+    { id: 'live-lessons', label: 'My Live Lessons', icon: 'live', path: '#' },
+    { id: 'group-lessons', label: 'My Group Lessons', icon: 'group', path: '#' },
+    { id: 'reports', label: 'My Lesson Reports', icon: 'reports', path: '#' },
+  ];
+
+  const ContentItems = [
+    { id: 'lessons', label: 'My Lessons', icon: 'lessons', path: '#' },
+    { id: 'courses', label: 'My Courses', icon: 'courses', path: '#' },
+    { id: 'library', label: 'Content Library', icon: 'library', path: '#' },
+  ];
+
+  const renderIcon = (icon: string) => {
+    switch (icon) {
+      case 'dashboard':
+        return (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 3H3V10H10V3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M21 3H14V10H21V3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M21 14H14V21H21V14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M10 14H3V21H10V14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        );
+      case 'account':
+        return (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        );
+      case 'history':
+        return (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 8V12L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3.05078 11.0002C3.27939 8.80966 4.30746 6.76518 5.93254 5.27208C7.55763 3.77897 9.6747 2.93296 11.8847 2.88768C14.0946 2.84239 16.2493 3.60067 17.9361 5.02388C19.6229 6.4471 20.7279 8.43469 21.0418 10.6125C21.3557 12.7904 20.8559 15.0041 19.641 16.8295C18.426 18.6549 16.5782 19.9715 14.4307 20.5223C12.2833 21.073 10.0121 20.8239 8.03639 19.8191C6.0607 18.8143 4.51339 17.1226 3.68542 15.0502" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        );
+      case 'messages':
+        return (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M22 6L12 13L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        );
+      case 'students':
+        return (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        );
+      case 'calendar':
+        return (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        );
+      default:
+        return (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L19.0711 7L19.0711 17L12 22L4.92893 17L4.92893 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        );
+    }
   };
 
-  const isActive = (itemName: string) => activeItem === itemName;
+  const renderNavItem = (item: any) => (
+    <li key={item.id} className="mb-1">
+      <Link
+        to={item.path}
+        className={`flex items-center py-2 px-4 rounded-md text-sm ${
+          isActive(item.id)
+            ? 'bg-indigo-50 text-indigo-600 font-medium'
+            : 'text-gray-700 hover:bg-gray-100'
+        }`}
+      >
+        <span className="inline-flex items-center justify-center w-6 h-6 mr-3">
+          {renderIcon(item.icon)}
+        </span>
+        {item.label}
+      </Link>
+    </li>
+  );
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar-header">
-        <img src="/assets/edugo-logo.svg" alt="edugo.ai" className="sidebar-logo" />
+    <>
+      {/* Mobile menu button */}
+      <button
+        type="button"
+        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        <span className="sr-only">Open sidebar</span>
+        <svg
+          className="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+          />
+        </svg>
+      </button>
+
+      {/* Sidebar for mobile */}
+      <div 
+        className={`fixed inset-0 flex z-30 md:hidden transform ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300 ease-in-out`}
+      >
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setIsMobileMenuOpen(false)}></div>
+
+        <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
+          <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+            <div className="flex items-center px-4 mb-6">
+              <img
+                className="h-8"
+                src="/assets/edugo-logo.svg"
+                alt="edugo.ai"
+              />
+            </div>
+
+            <nav className="sidebar-nav">
+              <ul>
+                {NavItems.map(renderNavItem)}
+              </ul>
+
+              <div className="mt-8 mb-2 px-4">
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  STUDENTS
+                </h3>
+              </div>
+              <ul>
+                {StudentItems.map(renderNavItem)}
+              </ul>
+
+              <div className="mt-8 mb-2 px-4">
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  MY LIVE LESSONS
+                </h3>
+              </div>
+              <ul>
+                {LiveLessonItems.map(renderNavItem)}
+              </ul>
+
+              <div className="mt-8 mb-2 px-4">
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  MY CONTENT
+                </h3>
+              </div>
+              <ul>
+                {ContentItems.map(renderNavItem)}
+              </ul>
+            </nav>
+          </div>
+
+          <div className="flex-shrink-0 flex items-center border-t p-4">
+            <div className="flex-shrink-0">
+              <img className="h-10 w-10 rounded-full" src="/assets/avatar.png" alt="User avatar" />
+            </div>
+            <div className="ml-3">
+              <p className="text-sm font-medium text-gray-900">Joaquin Trainer</p>
+              <p className="text-xs text-gray-500">Full Profile</p>
+              <p className="text-xs text-gray-500">Europe/Berlin</p>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <nav className="sidebar-nav">
-        {/* Main Navigation Item */}
-        <div className="nav-section">
-          <Link 
-            to="/dashboard" 
-            className={`nav-item ${isActive('dashboard') ? 'active' : ''}`}
-          >
-            <span className="nav-icon">
-              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" 
-                  fill="currentColor" />
-              </svg>
-            </span>
-            <span>Dashboard</span>
-          </Link>
+
+      {/* Sidebar for desktop */}
+      <div className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:w-64 md:border-r md:border-gray-200 md:bg-white">
+        <div className="flex items-center h-16 px-6 border-b border-gray-200">
+          <img
+            className="h-8"
+            src="/assets/edugo-logo.svg"
+            alt="edugo.ai"
+          />
         </div>
 
-        {/* Account Section */}
-        <div className="nav-section">
-          <Link 
-            to="/account" 
-            className={`nav-item ${isActive('account') ? 'active' : ''}`}
-          >
-            <span className="nav-icon">
-              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" 
-                  fill="currentColor" />
-              </svg>
-            </span>
-            <span>My Account</span>
-          </Link>
+        <div className="flex-1 flex flex-col overflow-y-auto">
+          <nav className="flex-1 py-4 sidebar-nav">
+            <ul>
+              {NavItems.map(renderNavItem)}
+            </ul>
+
+            <div className="mt-8 mb-2 px-4">
+              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                STUDENTS
+              </h3>
+            </div>
+            <ul>
+              {StudentItems.map(renderNavItem)}
+            </ul>
+
+            <div className="mt-8 mb-2 px-4">
+              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                MY LIVE LESSONS
+              </h3>
+            </div>
+            <ul>
+              {LiveLessonItems.map(renderNavItem)}
+            </ul>
+
+            <div className="mt-8 mb-2 px-4">
+              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                MY CONTENT
+              </h3>
+            </div>
+            <ul>
+              {ContentItems.map(renderNavItem)}
+            </ul>
+          </nav>
         </div>
 
-        {/* Teaching History Section */}
-        <div className="nav-section">
-          <Link 
-            to="/teaching-history" 
-            className={`nav-item ${isActive('teaching-history') ? 'active' : ''}`}
-          >
-            <span className="nav-icon">
-              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" 
-                  fill="currentColor" />
-              </svg>
-            </span>
-            <span>My Teaching History</span>
-          </Link>
-        </div>
-
-        {/* Students Section */}
-        <div className="nav-section">
-          <div 
-            className="section-header" 
-            onClick={() => toggleSection('students')}
-          >
-            <span>STUDENTS</span>
-            <span className="section-toggle">
-              {openSections.students ? (
-                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
-                  <path d="M7 14l5-5 5 5z" fill="currentColor" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
-                  <path d="M7 10l5 5 5-5z" fill="currentColor" />
-                </svg>
-              )}
-            </span>
+        <div className="flex-shrink-0 flex items-center border-t p-4">
+          <div className="flex-shrink-0">
+            <img className="h-10 w-10 rounded-full" src="/assets/avatar.png" alt="User avatar" />
           </div>
-          
-          <div className={`section-content ${openSections.students ? 'open' : 'closed'}`}>
-            <Link 
-              to="/messages" 
-              className={`nav-item ${isActive('messages') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Messages</span>
-            </Link>
-            
-            <Link 
-              to="/students" 
-              className={`nav-item ${isActive('students-list') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Students</span>
-            </Link>
+          <div className="ml-3">
+            <p className="text-sm font-medium text-gray-900">Joaquin Trainer</p>
+            <p className="text-xs text-gray-500">Full Profile</p>
+            <p className="text-xs text-gray-500">Europe/Berlin</p>
           </div>
         </div>
-
-        {/* Live Lessons Section */}
-        <div className="nav-section">
-          <div 
-            className="section-header" 
-            onClick={() => toggleSection('liveLessons')}
-          >
-            <span>MY LIVE LESSONS</span>
-            <span className="section-toggle">
-              {openSections.liveLessons ? (
-                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
-                  <path d="M7 14l5-5 5 5z" fill="currentColor" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
-                  <path d="M7 10l5 5 5-5z" fill="currentColor" />
-                </svg>
-              )}
-            </span>
-          </div>
-          
-          <div className={`section-content ${openSections.liveLessons ? 'open' : 'closed'}`}>
-            <Link 
-              to="/calendar" 
-              className={`nav-item ${isActive('calendar') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Calendar</span>
-            </Link>
-            
-            <Link 
-              to="/availability" 
-              className={`nav-item ${isActive('availability') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" 
-                    fill="currentColor" />
-                  <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Availability</span>
-            </Link>
-            
-            <Link 
-              to="/live-lessons" 
-              className={`nav-item ${isActive('live-lessons') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M21 6h-7.59l3.29-3.29L16 2l-4 4-4-4-.71.71L10.59 6H3c-1.1 0-2 .89-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.11-.9-2-2-2zm0 14H3V8h18v12zM9 10v8l7-4z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Live Lessons</span>
-            </Link>
-            
-            <Link 
-              to="/group-lessons" 
-              className={`nav-item ${isActive('group-lessons') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Group Lessons</span>
-            </Link>
-            
-            <Link 
-              to="/lesson-reports" 
-              className={`nav-item ${isActive('lesson-reports') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Lesson Reports</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Content Section */}
-        <div className="nav-section">
-          <div 
-            className="section-header" 
-            onClick={() => toggleSection('content')}
-          >
-            <span>MY CONTENT</span>
-            <span className="section-toggle">
-              {openSections.content ? (
-                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
-                  <path d="M7 14l5-5 5 5z" fill="currentColor" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
-                  <path d="M7 10l5 5 5-5z" fill="currentColor" />
-                </svg>
-              )}
-            </span>
-          </div>
-          
-          <div className={`section-content ${openSections.content ? 'open' : 'closed'}`}>
-            <Link 
-              to="/lessons" 
-              className={`nav-item ${isActive('lessons') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Lessons</span>
-            </Link>
-            
-            <Link 
-              to="/courses" 
-              className={`nav-item ${isActive('courses') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>My Courses</span>
-            </Link>
-            
-            <Link 
-              to="/content-library" 
-              className={`nav-item ${isActive('content-library') ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                  <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z" 
-                    fill="currentColor" />
-                </svg>
-              </span>
-              <span>Content Library</span>
-            </Link>
-          </div>
-        </div>
-      </nav>
-      
-      {/* User Profile Footer */}
-      <div className="sidebar-footer">
-        <div className="user-profile">
-          <div className="user-avatar">
-            <img src="/assets/avatar.png" alt="User" />
-          </div>
-          <div className="user-info">
-            <div className="user-name">Joaquin Trainer</div>
-            <div className="user-role">ESL Trainer · F2</div>
-          </div>
-        </div>
-        <div className="user-location">Europe/Berlin</div>
       </div>
-    </aside>
+    </>
   );
 }
 
