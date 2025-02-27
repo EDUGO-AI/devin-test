@@ -22,3 +22,7 @@ args = "cd react && npx nx serve devin-test-react"
 [[ports]]
 localPort = 4202
 externalPort = 80
+
+[[ports]]
+localPort = 4203
+externalPort = 3000
