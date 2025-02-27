@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "buildCommand": "npx nx build devin-test-react",
+  "outputDirectory": "dist/apps/devin-test-react"
+}
