@@ -1,4 +1,5 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import React from 'react';
 
 interface NavItem {
   id: string;
@@ -159,21 +160,181 @@ export function SidebarNavigation({ activeItem = 'dashboard' }: SidebarNavigatio
     }
   ];
 
+  // Define inline styles to ensure consistent rendering regardless of Tailwind CSS
+  const styles: {
+    sidebar: React.CSSProperties;
+    logoSection: React.CSSProperties;
+    logoImage: React.CSSProperties;
+    navContainer: React.CSSProperties;
+    navRoot: React.CSSProperties;
+    sectionContainer: React.CSSProperties;
+    sectionHeader: React.CSSProperties;
+    navItem: React.CSSProperties;
+    navLink: (isActive: boolean) => React.CSSProperties;
+    navLinkHover: React.CSSProperties;
+    iconContainer: React.CSSProperties;
+    labelContainer: React.CSSProperties;
+    addButton: React.CSSProperties;
+    addButtonHover: React.CSSProperties;
+    addButtonText: React.CSSProperties;
+    profileSection: React.CSSProperties;
+    profileContainer: React.CSSProperties;
+    avatarContainer: React.CSSProperties;
+    avatar: React.CSSProperties;
+    profileInfo: React.CSSProperties;
+    profileName: React.CSSProperties;
+    profileActions: React.CSSProperties;
+    profileButton: React.CSSProperties;
+    profileButtonHover: React.CSSProperties;
+    separator: React.CSSProperties;
+    location: React.CSSProperties;
+  } = {
+    sidebar: {
+      width: '200px',
+      backgroundColor: '#1a1a3f', // primary color
+      height: '100vh',
+      position: 'fixed',
+      left: 0,
+      top: 0,
+      color: 'white',
+      display: 'flex',
+      flexDirection: 'column',
+      zIndex: 50,
+    },
+    logoSection: {
+      height: '70px',
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0 16px',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.1)', // primary-700 equivalent
+    },
+    logoImage: {
+      height: '32px',
+    },
+    navContainer: {
+      flex: 1,
+      overflowY: 'auto',
+      padding: '8px 0',
+    },
+    navRoot: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+    },
+    sectionContainer: {
+      marginBottom: '4px',
+    },
+    sectionHeader: {
+      padding: '0 16px',
+      paddingTop: '24px',
+      paddingBottom: '8px',
+      fontSize: '12px',
+      textTransform: 'uppercase',
+      fontWeight: 600,
+      color: 'rgba(209, 213, 219, 1)', // gray-300 equivalent
+    },
+    navItem: {
+      padding: '0 8px',
+    },
+    navLink: (isActive: boolean) => ({
+      display: 'flex',
+      alignItems: 'center',
+      padding: '8px',
+      margin: '4px 0',
+      borderRadius: '4px',
+      fontSize: '14px',
+      transition: 'background-color 0.2s',
+      backgroundColor: isActive ? 'rgba(255, 255, 255, 0.15)' : 'transparent',
+      color: isActive ? 'white' : 'rgba(229, 231, 235, 1)', // gray-200 equivalent
+    }),
+    navLinkHover: {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    },
+    iconContainer: {
+      marginRight: '12px',
+    },
+    labelContainer: {
+      flex: 1,
+    },
+    addButton: {
+      width: '20px',
+      height: '20px',
+      borderRadius: '2px',
+      backgroundColor: 'rgba(75, 85, 99, 1)', // gray-600 equivalent
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'white',
+    },
+    addButtonHover: {
+      backgroundColor: 'rgba(107, 114, 128, 1)', // gray-500 equivalent
+    },
+    addButtonText: {
+      fontSize: '12px',
+      fontWeight: 'bold',
+    },
+    profileSection: {
+      marginTop: 'auto',
+      borderTop: '1px solid rgba(255, 255, 255, 0.1)', // primary-700 equivalent
+      padding: '16px',
+    },
+    profileContainer: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    avatarContainer: {
+      flexShrink: 0,
+      marginRight: '12px',
+    },
+    avatar: {
+      width: '32px',
+      height: '32px',
+      borderRadius: '50%',
+    },
+    profileInfo: {
+      flex: 1,
+    },
+    profileName: {
+      fontSize: '14px',
+      fontWeight: 500,
+    },
+    profileActions: {
+      display: 'flex',
+      fontSize: '12px',
+      color: 'rgba(209, 213, 219, 1)', // gray-300 equivalent
+      marginTop: '4px',
+    },
+    profileButton: {
+      cursor: 'pointer',
+    },
+    profileButtonHover: {
+      textDecoration: 'underline',
+    },
+    separator: {
+      margin: '0 4px',
+    },
+    location: {
+      fontSize: '12px',
+      color: 'rgba(96, 165, 250, 1)', // blue-300 equivalent
+      marginTop: '8px',
+    },
+  };
+
   return (
-    <aside className="w-[200px] bg-primary h-screen fixed left-0 top-0 text-white flex flex-col z-50">
+    <aside style={styles.sidebar}>
       {/* Logo section */}
-      <div className="h-[70px] flex items-center px-4 border-b border-primary-700">
-        <img src="/logo.svg" alt="edugo.ai" className="h-8" />
+      <div style={styles.logoSection}>
+        <img src="/logo.svg" alt="edugo.ai" style={styles.logoImage} />
       </div>
       
       {/* Navigation sections */}
-      <div className="flex-1 overflow-y-auto py-2">
-        <NavigationMenu.Root className="flex flex-col w-full" orientation="vertical">
+      <div style={styles.navContainer}>
+        <NavigationMenu.Root style={styles.navRoot} orientation="vertical">
           {navSections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="mb-1">
+            <div key={sectionIndex} style={styles.sectionContainer}>
               {/* Section header if present */}
               {section.header && (
-                <div className="px-4 pt-6 pb-2 text-xs uppercase font-semibold text-gray-300">
+                <div style={styles.sectionHeader}>
                   {section.header}
                 </div>
               )}
@@ -183,25 +344,21 @@ export function SidebarNavigation({ activeItem = 'dashboard' }: SidebarNavigatio
                 const isActive = activeItem === item.id;
                 
                 return (
-                  <NavigationMenu.Item key={item.id} className="px-2">
+                  <NavigationMenu.Item key={item.id} style={styles.navItem}>
                     <NavigationMenu.Link
-                      className={`flex items-center px-2 py-2 my-1 rounded text-sm transition-colors ${
-                        isActive 
-                          ? 'bg-white bg-opacity-15 text-white' 
-                          : 'text-gray-200 hover:bg-white hover:bg-opacity-10'
-                      }`}
+                      style={styles.navLink(isActive)}
                       href={`/${item.id}`}
                     >
                       {/* Icon */}
-                      <span className="mr-3">{item.icon}</span>
+                      <span style={styles.iconContainer}>{item.icon}</span>
                       
                       {/* Label */}
-                      <span className="flex-1">{item.label}</span>
+                      <span style={styles.labelContainer}>{item.label}</span>
                       
                       {/* Add button if needed */}
                       {item.hasAddButton && (
-                        <button className="w-5 h-5 rounded-sm bg-gray-600 flex items-center justify-center text-white hover:bg-gray-500">
-                          <span className="text-xs font-bold">+</span>
+                        <button style={styles.addButton}>
+                          <span style={styles.addButtonText}>+</span>
                         </button>
                       )}
                     </NavigationMenu.Link>
@@ -214,25 +371,25 @@ export function SidebarNavigation({ activeItem = 'dashboard' }: SidebarNavigatio
       </div>
       
       {/* User profile section */}
-      <div className="mt-auto border-t border-primary-700 p-4">
-        <div className="flex items-center">
-          <div className="flex-shrink-0 mr-3">
+      <div style={styles.profileSection}>
+        <div style={styles.profileContainer}>
+          <div style={styles.avatarContainer}>
             <img
               src="/avatars/joaquin.jpg"
               alt="User avatar"
-              className="w-8 h-8 rounded-full"
+              style={styles.avatar}
             />
           </div>
-          <div className="flex-1">
-            <div className="text-sm font-medium">Joaquin Trainer</div>
-            <div className="flex text-xs text-gray-300 mt-1">
-              <button className="hover:underline">Edit Profile</button>
-              <span className="mx-1">|</span>
-              <button className="hover:underline">Log Out</button>
+          <div style={styles.profileInfo}>
+            <div style={styles.profileName}>Joaquin Trainer</div>
+            <div style={styles.profileActions}>
+              <button style={styles.profileButton}>Edit Profile</button>
+              <span style={styles.separator}>|</span>
+              <button style={styles.profileButton}>Log Out</button>
             </div>
           </div>
         </div>
-        <div className="text-xs text-blue-300 mt-2">
+        <div style={styles.location}>
           Europe/Berlin
         </div>
       </div>
