@@ -25,8 +25,8 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ activeItem }) => 
   const isActive = (itemName: string) => activeItem === itemName;
 
   return (
-    <aside className="w-[200px] bg-sidebar min-h-screen fixed left-0 top-0 border-r border-border-light text-gray-700">
-      <div className="h-[70px] flex items-center px-4 border-b border-border-light">
+    <aside className="w-[200px] bg-[#f8f8f8] min-h-screen fixed left-0 top-0 border-r border-[#e5e7eb] text-gray-700">
+      <div className="h-[70px] flex items-center px-4 border-b border-[#e5e7eb]">
         <img src="/logo.svg" alt="edugo.ai" className="h-8" />
       </div>
       <NavigationMenu.Root className="flex flex-col w-full" orientation="vertical">

@@ -172,8 +172,8 @@ const DashboardTwo: React.FC = () => {
   return (
     <Layout activeNavItem="dashboard">
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-text-dark mb-1">Dashboard</h1>
-        <p className="text-text-medium mb-6">Welcome, Joaquin</p>
+        <h1 className="text-2xl font-semibold text-[#333333] mb-1">Dashboard</h1>
+        <p className="text-[#666666] mb-6">Welcome, Joaquin</p>
       </div>
 
       <div className="grid grid-cols-2 gap-6 mb-6">

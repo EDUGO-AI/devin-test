@@ -15,6 +15,9 @@ export default defineConfig({
     port: 4300,
     host: 'localhost',
   },
+  css: {
+    postcss: '../../postcss.config.js',
+  },
   plugins: [react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
   // Uncomment this if you are using workers.
   // worker: {

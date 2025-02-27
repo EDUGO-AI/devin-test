@@ -59,7 +59,7 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
   return (
     <div className="overflow-x-auto">
       <table className="w-full border-collapse">
-        <thead className="bg-table-header text-xs uppercase font-medium text-gray-500 tracking-wider">
+        <thead className="bg-[#f9fafb] text-xs uppercase font-medium text-gray-500 tracking-wider">
           <tr>
             <th className="px-4 py-3 text-left">
               <Checkbox.Root 
@@ -79,9 +79,9 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
             <th className="px-4 py-3 text-left">Tools</th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-border-light">
+        <tbody className="bg-white divide-y divide-[#e5e7eb]">
           {lessons.map(lesson => (
-            <tr key={lesson.id} className="border-b border-border-light hover:bg-hover-blue">
+            <tr key={lesson.id} className="border-b border-[#e5e7eb] hover:bg-[#f0f7ff]">
               <td className="px-4 py-4">
                 <Checkbox.Root 
                   className="flex h-4 w-4 appearance-none items-center justify-center rounded border border-gray-300 bg-white"
@@ -104,7 +104,7 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                     />
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-text-dark">{lesson.student.name}</div>
+                    <div className="text-sm font-medium text-[#333333]">{lesson.student.name}</div>
                     <div className="text-xs text-gray-500">{lesson.student.email}</div>
                   </div>
                 </div>
@@ -125,7 +125,7 @@ const LessonsTable: React.FC<LessonsTableProps> = ({
                 </span>
               </td>
               <td className="px-4 py-4">
-                <div className="text-sm text-text-dark">{lesson.dateTime.date}</div>
+                <div className="text-sm text-[#333333]">{lesson.dateTime.date}</div>
                 <div className="text-xs text-gray-500">{lesson.dateTime.time}</div>
               </td>
               <td className="px-4 py-4">
