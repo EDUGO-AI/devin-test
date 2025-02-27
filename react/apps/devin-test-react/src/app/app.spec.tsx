@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 import App from './app';
 
@@ -8,10 +9,10 @@ describe('App', () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it('should have a greeting as the title', () => {
-    const { getByText } = render(<App />);
+  it('should have the dashboard component', () => {
+    const { getByRole } = render(<App />);
     expect(
-      getByText(new RegExp('Welcome devin-test-react', 'gi'))
-    ).toBeTruthy();
+      getByRole('heading', { name: 'Dashboard' })
+    ).toBeInTheDocument();
   });
 });

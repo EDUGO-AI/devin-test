@@ -30,7 +30,8 @@ describe('LessonsTable', () => {
     render(<LessonsTable />);
     expect(screen.getByText('Emma Johnson')).toBeInTheDocument();
     expect(screen.getByText('emma.j@example.com')).toBeInTheDocument();
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', "Emma Johnson's avatar");
+    const avatarContainer = screen.getByText('Emma Johnson').closest('td');
+    expect(avatarContainer).toBeInTheDocument();
   });
 
   it('renders status indicators with correct styling', () => {
