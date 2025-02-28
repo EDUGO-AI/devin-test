@@ -60,7 +60,7 @@ export const UpcomingLessonsTable: React.FC<UpcomingLessonsTableProps> = ({
   return (
     <div className="w-full rounded-xl overflow-hidden shadow-sm">
       {/* Table header */}
-      <div className="bg-[#f2f4f7] py-3 px-6 grid grid-cols-6 gap-4 text-xs text-[#667087] uppercase tracking-wider font-extrabold border-b border-gray-200">
+      <div className="bg-[#f2f4f7] py-3 px-6 grid grid-cols-6 gap-4 text-[14px] text-[#667087] uppercase tracking-wider font-extrabold border-b border-gray-200">
         <div className="flex items-center">
           <Checkbox.Root 
             className="flex h-5 w-5 items-center justify-center rounded border border-gray-300 bg-white hover:border-indigo-500 transition-colors"
@@ -70,13 +70,13 @@ export const UpcomingLessonsTable: React.FC<UpcomingLessonsTableProps> = ({
               <CheckIcon />
             </Checkbox.Indicator>
           </Checkbox.Root>
-          <span className="ml-3">MY STUDENT</span>
+          <span className="ml-3 font-[800] leading-[20px]">MY STUDENT</span>
         </div>
-        <div className="text-center">SESSION DURATION</div>
-        <div className="text-center">STATUS</div>
-        <div className="text-center">TIME</div>
-        <div className="text-center">LANGUAGE</div>
-        <div className="text-center">TOOLS</div>
+        <div className="text-center font-[800] leading-[20px]">SESSION DURATION</div>
+        <div className="text-center font-[800] leading-[20px]">STATUS</div>
+        <div className="text-center font-[800] leading-[20px]">TIME</div>
+        <div className="text-center font-[800] leading-[20px]">LANGUAGE</div>
+        <div className="text-center font-[800] leading-[20px]">TOOLS</div>
       </div>
 
       {/* Table rows */}
@@ -105,8 +105,8 @@ export const UpcomingLessonsTable: React.FC<UpcomingLessonsTableProps> = ({
                     />
                   </div>
                   <div>
-                    <div className="font-medium text-gray-900">{lesson.student.name}</div>
-                    <div className="text-sm text-gray-500">{lesson.student.email}</div>
+                    <div className="text-[#101828] text-[14px] font-[500] leading-[20px]">{lesson.student.name}</div>
+                    <div className="text-[#667087] text-[14px] font-[400] leading-[20px]">{lesson.student.email}</div>
                   </div>
                 </div>
               </div>
@@ -118,20 +118,20 @@ export const UpcomingLessonsTable: React.FC<UpcomingLessonsTableProps> = ({
                     <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
-                <span className="text-sm">{lesson.duration}</span>
+                <span className="text-[#101828] text-[14px] font-[500] leading-[20px]">{lesson.duration}</span>
               </div>
 
               {/* Status */}
               <div className="flex justify-center">
-                <span className="px-3 py-1 text-xs rounded-full bg-[#12B76A] text-white font-medium inline-block">
+                <span className="px-3 py-1 text-[14px] rounded-full bg-[#12B76A] text-[#079455] font-[600] leading-[20px] inline-block">
                   Confirmed by trainer
                 </span>
               </div>
 
               {/* Time */}
               <div className="text-center">
-                <div className="text-sm text-gray-900">{lesson.dateTime.date}</div>
-                <div className="text-sm text-gray-500">{lesson.dateTime.time}</div>
+                <div className="text-[#101828] text-[14px] font-[500] leading-[20px]">{lesson.dateTime.date}</div>
+                <div className="text-[#667087] text-[14px] font-[400] leading-[20px]">{lesson.dateTime.time}</div>
               </div>
 
               {/* Language */}
@@ -140,21 +140,21 @@ export const UpcomingLessonsTable: React.FC<UpcomingLessonsTableProps> = ({
                   <div className="h-5 w-5 rounded-full overflow-hidden mr-1 flex-shrink-0 border border-gray-200">
                     <img src="/flags/en.svg" alt="English" className="h-full w-full object-cover" />
                   </div>
-                  <span className="text-sm">{lesson.languages.from}</span>
+                  <span className="text-[#101828] text-[14px] font-[500] leading-[20px]">{lesson.languages.from}</span>
                 </div>
-                <span className="mx-2 text-sm text-gray-500">to</span>
+                <span className="mx-2 text-[#101828] text-[14px] font-[500] leading-[20px]">to</span>
                 <div className="inline-flex items-center">
                   <div className="h-5 w-5 rounded-full overflow-hidden mr-1 flex-shrink-0 border border-gray-200">
                     <img src="/flags/de.svg" alt="German" className="h-full w-full object-cover" />
                   </div>
-                  <span className="text-sm">{lesson.languages.to}</span>
+                  <span className="text-[#101828] text-[14px] font-[500] leading-[20px]">{lesson.languages.to}</span>
                 </div>
               </div>
 
               {/* Tools */}
               <div className="flex items-center justify-center space-x-3">
                 <button 
-                  className="px-3 py-1 text-xs font-medium rounded-md border border-[#7F56D9] text-[#7F56D9] hover:bg-indigo-50 transition-colors"
+                  className="px-3 py-1 text-[12px] font-[600] leading-[18px] rounded-md border border-[#7F56D9] text-[#5925DC] hover:bg-indigo-50 transition-colors"
                   onClick={() => onPrepareCall?.(lesson.id)}
                 >
                   Prepare call
