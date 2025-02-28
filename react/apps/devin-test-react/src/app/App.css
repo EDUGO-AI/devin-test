@@ -4,22 +4,22 @@
   background-color: #f5f6fa;
 }
 
-.sidebar {
+/* Renamed to avoid conflicts with SidebarNavigation component */
+.app-sidebar {
   width: 240px;
-  background-color: #2196F3; /* Darker blue */
-  color: white;
-  padding: 20px;
+  background-color: white; /* Changed to white */
+  border-right: 1px solid #E5E7EB;
   overflow-y: auto; /* Add scroll if content exceeds height */
 }
 
-.sidebar a {
+.app-sidebar a {
   display: block;
   padding: 10px;
   text-decoration: none;
-  color: white;
+  color: #4B5563;
 }
 
-.sidebar a:hover {
+.app-sidebar a:hover {
   background-color: #1976D2; /* Slightly darker hover effect */
 }
 
@@ -30,13 +30,13 @@
 }
 
 @media (max-width: 768px) {
-  .sidebar {
+  .app-sidebar {
     width: 64px;
   }
-  .sidebar a {
+  .app-sidebar a {
     padding: 5px;
   }
-  .sidebar a > * { /* Hide text on smaller screens */
+  .app-sidebar a > * { /* Hide text on smaller screens */
     display: none;
   }
 }

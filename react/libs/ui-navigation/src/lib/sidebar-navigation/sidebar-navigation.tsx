@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -177,10 +176,9 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
       </div>
 
       <div className="profile-container">
-        <div className="profile-avatar">JT</div>
+        <img src="/assets/avatar.png" alt="Joaquin Trainer" className="profile-avatar" />
         <div className="profile-info">
           <div className="profile-name">Joaquin Trainer</div>
-          <div className="profile-role">data.trainer.fargo</div>
           <div className="profile-location">Europe/Berlin</div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { LessonRow } from '@edugo/ui-components';
+import { LessonRow, CreateLessonCard, StartVideocallCard } from '@edugo/ui-components';
 
 const DashboardTwo: React.FC = () => {
   const [isCreateLessonOpen, setIsCreateLessonOpen] = useState(false);
@@ -161,42 +161,8 @@ const DashboardTwo: React.FC = () => {
 
       {/* Action cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        {/* Create Lesson card */}
-        <div className="bg-white rounded-lg overflow-hidden border border-gray-200 flex items-center">
-          <div className="flex-1 p-6">
-            <h2 className="text-lg font-medium mb-2">Create<br />Lesson</h2>
-            <button 
-              onClick={() => setIsCreateLessonOpen(true)}
-              className="mt-2 flex items-center justify-center w-10 h-10 rounded-full bg-white border border-gray-300"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <div className="hidden sm:block p-4">
-            <img src="/assets/create-lesson.png" alt="Create Lesson" className="w-auto h-24" />
-          </div>
-        </div>
-
-        {/* Start Videocall card */}
-        <div className="bg-white rounded-lg overflow-hidden border border-gray-200 flex items-center">
-          <div className="flex-1 p-6">
-            <h2 className="text-lg font-medium mb-2">Start<br />Videocall</h2>
-            <button 
-              onClick={handleStartVideocall}
-              className="mt-2 flex items-center justify-center w-10 h-10 rounded-full bg-white border border-gray-300"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4A55FD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10 8L16 12L10 16V8Z" stroke="#4A55FD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <div className="hidden sm:block p-4">
-            <img src="/assets/start-videocall.png" alt="Start Videocall" className="w-auto h-24" />
-          </div>
-        </div>
+        <CreateLessonCard onClick={() => setIsCreateLessonOpen(true)} />
+        <StartVideocallCard onClick={handleStartVideocall} />
       </div>
 
       {/* Upcoming lessons section */}

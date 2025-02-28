@@ -33,10 +33,10 @@ export const LessonRow: React.FC<LessonRowProps> = ({
   onInfo
 }) => {
   return (
-    <div className="flex items-center justify-between px-4 py-3 bg-white rounded-lg hover:bg-gray-50 transition-colors duration-150">
+    <div className="flex items-center justify-between px-4 py-3 bg-white hover:bg-gray-50 transition-colors duration-150 border-b border-gray-100">
       {/* Student column */}
       <div className="flex items-center">
-        <img src={lesson.student.avatar} alt={lesson.student.name} className="w-10 h-10 rounded-full mr-3" />
+        <img src={lesson.student.avatar} alt={lesson.student.name} className="w-8 h-8 rounded-full mr-3" />
         <div>
           <p className="text-sm font-medium text-gray-900">{lesson.student.name}</p>
           <p className="text-xs text-gray-500">{lesson.student.email}</p>
@@ -53,13 +53,13 @@ export const LessonRow: React.FC<LessonRowProps> = ({
 
       {/* Status column */}
       <div className="flex items-center">
-        <span className="px-3 py-1 text-xs rounded-full bg-green-100 text-green-800">
+        <span className="px-3 py-1 text-xs rounded-full bg-green-50 text-green-700">
           {lesson.status}
         </span>
       </div>
 
       {/* Time column */}
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-center">
         <p className="text-sm text-gray-900">{lesson.time.date}</p>
         <p className="text-xs text-gray-500">{lesson.time.time}</p>
       </div>
@@ -85,13 +85,13 @@ export const LessonRow: React.FC<LessonRowProps> = ({
       <div className="flex items-center space-x-2">
         <button 
           onClick={() => onPrepareCall(lesson.id)} 
-          className="px-3 py-1 text-xs bg-purple-100 text-purple-700 rounded-md"
+          className="px-3 py-1 text-xs font-medium rounded bg-[#EAE6F9] text-[#6941DE]"
         >
           Prepare call
         </button>
         <button 
           onClick={() => onCall(lesson.id)}
-          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-700"
+          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-50 text-green-700"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
@@ -99,7 +99,7 @@ export const LessonRow: React.FC<LessonRowProps> = ({
         </button>
         <button 
           onClick={() => onCancel(lesson.id)}
-          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-700"
+          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-700"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -117,3 +117,5 @@ export const LessonRow: React.FC<LessonRowProps> = ({
     </div>
   );
 };
+
+export default LessonRow;
