@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { LessonRow, CreateLessonCard, StartVideocallCard } from '@edugo/ui-components';
+import { UpcomingLessonsTable, CreateLessonCard, StartVideocallCard } from '@edugo/ui-components';
 
 const DashboardTwo: React.FC = () => {
   const [isCreateLessonOpen, setIsCreateLessonOpen] = useState(false);
@@ -182,29 +182,25 @@ const DashboardTwo: React.FC = () => {
           </div>
         </div>
 
-        {/* Table header */}
-        <div className="grid grid-cols-6 gap-4 p-4 bg-gray-50 text-xs font-medium text-gray-500 uppercase">
-          <div className="col-span-1">My Student</div>
-          <div className="col-span-1 text-center">Session Duration</div>
-          <div className="col-span-1 text-center">Status</div>
-          <div className="col-span-1 text-center">Time</div>
-          <div className="col-span-1 text-center">Language</div>
-          <div className="col-span-1 text-center">Tools</div>
-        </div>
-
-        {/* Table rows */}
-        <div className="divide-y divide-gray-200">
-          {lessons.map((lesson) => (
-            <LessonRow
-              key={lesson.id}
-              lesson={lesson}
-              onPrepareCall={handlePrepareCall}
-              onCall={handleCall}
-              onCancel={handleCancel}
-              onInfo={handleInfo}
-            />
-          ))}
-        </div>
+        {/* Upcoming lessons table */}
+        <UpcomingLessonsTable
+          lessons={lessons.map(lesson => ({
+            id: lesson.id,
+            student: lesson.student,
+            duration: lesson.duration,
+            status: lesson.status,
+            dateTime: {
+              date: lesson.time.date,
+              time: lesson.time.time
+            },
+            languages: lesson.languages
+          }))}
+          onSelectRow={handleSelectLesson}
+          onPrepareCall={handlePrepareCall}
+          onStartCall={handleCall}
+          onCancelLesson={handleCancel}
+          onInfo={handleInfo}
+        />
       </div>
       {/* Create Lesson Dialog */}
       <Dialog.Root open={isCreateLessonOpen} onOpenChange={setIsCreateLessonOpen}>
