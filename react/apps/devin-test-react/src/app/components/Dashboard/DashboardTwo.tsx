@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { Link } from 'react-router-dom';
+import { LessonRow } from '@edugo/ui-components';
 
 const DashboardTwo: React.FC = () => {
   const [isCreateLessonOpen, setIsCreateLessonOpen] = useState(false);
@@ -26,6 +26,18 @@ const DashboardTwo: React.FC = () => {
 
   const handlePrepareCall = (id: string) => {
     console.log('Prepare call for lesson:', id);
+  };
+
+  const handleCall = (id: string) => {
+    console.log('Call lesson:', id);
+  };
+
+  const handleCancel = (id: string) => {
+    console.log('Cancel lesson:', id);
+  };
+
+  const handleInfo = (id: string) => {
+    console.log('Info for lesson:', id);
   };
 
   const lessons = [
@@ -217,78 +229,14 @@ const DashboardTwo: React.FC = () => {
         {/* Table rows */}
         <div className="divide-y divide-gray-200">
           {lessons.map((lesson) => (
-            <div key={lesson.id} className="grid grid-cols-6 gap-4 p-4 hover:bg-gray-50 transition-colors duration-150">
-              {/* Student column */}
-              <div className="col-span-1 flex items-center">
-                <img src={lesson.student.avatar} alt={lesson.student.name} className="w-8 h-8 rounded-full mr-3" />
-                <div>
-                  <p className="text-sm font-medium text-gray-900">{lesson.student.name}</p>
-                  <p className="text-xs text-gray-500">{lesson.student.email}</p>
-                </div>
-              </div>
-
-              {/* Duration column */}
-              <div className="col-span-1 flex items-center justify-center">
-                <div className="flex items-center text-gray-500">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                  <span className="text-sm">{lesson.duration}</span>
-                </div>
-              </div>
-
-              {/* Status column */}
-              <div className="col-span-1 flex items-center justify-center">
-                <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                  {lesson.status}
-                </span>
-              </div>
-
-              {/* Time column */}
-              <div className="col-span-1 flex flex-col items-center justify-center">
-                <p className="text-sm text-gray-900">{lesson.time.date}</p>
-                <p className="text-xs text-gray-500">{lesson.time.time}</p>
-              </div>
-
-              {/* Language column */}
-              <div className="col-span-1 flex items-center justify-center space-x-2">
-                <div className="flex items-center">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 mr-1">
-                    <span className="text-xs">🇬🇧</span>
-                  </span>
-                  <span className="text-sm">{lesson.languages.from}</span>
-                </div>
-                <span className="text-gray-400">to</span>
-                <div className="flex items-center">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 mr-1">
-                    <span className="text-xs">🇩🇪</span>
-                  </span>
-                  <span className="text-sm">{lesson.languages.to}</span>
-                </div>
-              </div>
-
-              {/* Tools column */}
-              <div className="col-span-1 flex items-center justify-center space-x-2">
-                <button onClick={() => handlePrepareCall(lesson.id)} className="px-3 py-1 text-xs bg-indigo-100 text-indigo-700 rounded-md">
-                  Prepare call
-                </button>
-                <button className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-700">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                  </svg>
-                </button>
-                <button className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-700">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                  </svg>
-                </button>
-                <button className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-700">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
+            <LessonRow
+              key={lesson.id}
+              lesson={lesson}
+              onPrepareCall={handlePrepareCall}
+              onCall={handleCall}
+              onCancel={handleCancel}
+              onInfo={handleInfo}
+            />
           ))}
         </div>
       </div>
@@ -315,7 +263,7 @@ const DashboardTwo: React.FC = () => {
                 </select>
               </div>
               <div className="mb-4">
-                <label htmlFor="datetime" className="block text-sm font-medium text-gray-700 mb-1">Date & Time</label>
+                <label htmlFor="datetime" className="block text-sm font-medium text-gray-700 mb-1">Date and Time</label>
                 <input type="datetime-local" id="datetime" name="datetime" className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div className="mb-6">
